@@ -2,7 +2,7 @@
   "name": "projectbot",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
     "colors": "^1.3.3",
-    "nodemon": "^1.18.11",
+    "express": "^4.16.4",
+    "nodemon": "^1.19.0",
+    "request": "^2.88.0",
     "xregexp": "^4.2.4"
   }
 }
