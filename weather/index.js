@@ -1,6 +1,7 @@
 "use strict"
 
 const axios = require("axios");
+require('dotenv').config();
 const apiKey = process.env.APIKEY;
 
 const formatData = data => {
@@ -12,26 +13,46 @@ const formatData = data => {
     }
 }
 
-const getWeather = location => {
-    return new Promise(async (resolve,reject) => {
-        try {
-            const weatherConditions = await axios.get(
-                "http://api.apixu.com/v1/current.json",
-                {
-                  params: {
-                    key:apiKey,
-                    q:location,
-                    days:3
-                  }
-                });
+let getWeather = location => {
+  console.log("\n\n\n\n",location,"\n",apiKey,"\n\n\n\n");
+  return new Promise(async (resolve, reject) => {
+    try {
+      // console.log("\n\n\n\n",location,"\n",apikey,"\n\n\n\n");
+      const weatherConditions = await axios.get(
+        "https://api.apixu.com/v1/forecast.json",
+        {
+          params: {
+            key: apiKey,
+            q: location,
+            days: 3
+          }
+        }
+      );
+      resolve(formatData(weatherConditions.data));
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 
-                //send a request and get a response
-
-                resolve(formatData(weatherConditions.data));
-            } catch (error) {
-              reject(error);
-            }
-    });
-}
+// let getWeather = location => {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       const weatherConditions = await axios.get(
+//         "https://api.apixu.com/v1/forecast.json",
+//         {
+//           params: {
+//             key: apiKey,
+//             q: location,
+//             days: 3
+//           }
+//         }
+//       );
+//       resolve(formatData(weatherConditions.data));
+//     } catch (error) {
+//       reject(error);
+//     }
+//   });
+// };
 
 module.exports = getWeather;

@@ -111,7 +111,7 @@ class FBeamer {
         }
     }
 
-
+    // this function sends the place to the weather API and returns the information
     sendMessage(payload) {
         return new Promise((resolve,reject) => {
             request({
@@ -133,6 +133,7 @@ class FBeamer {
         });
     }
 
+    // this function send the message
     txt(id,text,messaging_type = 'RESPONSE') {
         let obj = {
             messaging_type,
